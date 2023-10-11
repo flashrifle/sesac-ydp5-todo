@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Todo from './components/Todo';
+import AddTodo from './components/AddTodo';
 
 function App() {
     const [todoItems, setTodoItems] = useState([
@@ -19,11 +20,20 @@ function App() {
             done: true,
         },
     ]);
+
+    // todoItems 상태에 새로운 일을 추가하는 함수
+    const addItem = (newItem) => {
+        newItem.id = todoItems.length + 1;
+        newItem.done = false;
+
+        setTodoItems([...todoItems, newItem]);
+    };
     return (
         <div className="App">
+            <AddTodo addItem={addItem} />
             {/* todoItems를 반복, props로 데이터를 자식에게 전달 */}
             {todoItems.map((item) => (
-                <Todo key={item.id} item={todoItems} />
+                <Todo key={item.id} item={item} />
             ))}
         </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Todo({ item }) {
-    console.log(item);
+    console.log('item : ', item);
     const { id, title, done } = item;
     return (
         <div>
