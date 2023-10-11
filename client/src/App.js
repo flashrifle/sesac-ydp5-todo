@@ -28,12 +28,18 @@ function App() {
 
         setTodoItems([...todoItems, newItem]);
     };
+
+    const deleteItem = (value) => {
+        console.log('id', value);
+        setTodoItems(todoItems.filter((item, idx) => idx + 1 !== value));
+    };
+
     return (
         <div className="App">
             <AddTodo addItem={addItem} />
             {/* todoItems를 반복, props로 데이터를 자식에게 전달 */}
             {todoItems.map((item) => (
-                <Todo key={item.id} item={item} />
+                <Todo key={item.id} item={item} deleteItem={deleteItem} />
             ))}
         </div>
     );
