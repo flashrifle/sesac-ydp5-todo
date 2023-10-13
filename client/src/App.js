@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Todo from './components/Todo';
 import AddTodo from './components/AddTodo';
+import axios from 'axios';
 
 function App() {
+    console.log(process.env.REACT_APP_DB_HOST);
     const [todoItems, setTodoItems] = useState([
         {
             id: 1,
@@ -20,6 +22,16 @@ function App() {
             done: true,
         },
     ]);
+
+    useEffect(() => {
+        const getTodos = async () => {
+            const res = await axios.get(
+                `${process.env.REACT_APP_DB_HOST}/todos`
+            );
+            setTodoItems(res.data);
+        };
+        getTodos();
+    }, []);
 
     // todoItems 상태에 새로운 일을 추가하는 함수
     const addItem = (newItem) => {
