@@ -18,6 +18,7 @@ const StyledButton = styled.button`
     margin-left: 30px;
     border: 0;
     border-radius: 30%;
+    cursor: pointer;
 `;
 
 const StyledCheckBox = styled.input`

@@ -86,7 +86,9 @@ function App() {
             <StyledContainer className="App">
                 <h1>My Todo App</h1>
                 <AddTodo addItem={addItem} />{' '}
-                <StyledTodoCount>Todo:{todoItems.length}</StyledTodoCount>
+                <StyledTodoCount>
+                    Todo:{todoItems.length} &#x1F602;
+                </StyledTodoCount>
                 {/* todoItems를 반복, props로 데이터를 자식에게 전달 */}
                 {todoItems.map((item) => (
                     <Todo
