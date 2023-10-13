@@ -1,4 +1,29 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const StyledContainer = styled.div`
+    display: flex;
+    padding: 10px;
+`;
+
+const StyledTextBox = styled.input`
+    width: 300px;
+    height: 60px;
+    border: none;
+    border-bottom: 1px solid black;
+`;
+
+const StyledButton = styled.button`
+    background-color: #82d6f8;
+    margin-left: 30px;
+    border: 0;
+    border-radius: 30%;
+`;
+
+const StyledCheckBox = styled.input`
+    border-radius: 50%;
+    margin-right: 30px;
+`;
 
 export default function Todo({ item, deleteItem, updateItem }) {
     console.log('item : ', item);
@@ -40,8 +65,8 @@ export default function Todo({ item, deleteItem, updateItem }) {
     };
 
     return (
-        <div>
-            <input
+        <StyledContainer>
+            <StyledCheckBox
                 type="checkbox"
                 name={`todo${id}`}
                 id={`todo${id}`}
@@ -49,7 +74,7 @@ export default function Todo({ item, deleteItem, updateItem }) {
                 onChange={checkboxEventHandler}
             />
             {/* <label htmlFor={`todo${id}`}>{title}</label> */}
-            <input
+            <StyledTextBox
                 type="text"
                 value={todoItem.title}
                 readOnly={readOnly}
@@ -57,7 +82,7 @@ export default function Todo({ item, deleteItem, updateItem }) {
                 onChange={editEventHandler}
                 onKeyDown={editKeyEventHandler}
             />
-            <button onClick={deleteTodo}>DELETE</button>
-        </div>
+            <StyledButton onClick={deleteTodo}>DELETE</StyledButton>
+        </StyledContainer>
     );
 }
