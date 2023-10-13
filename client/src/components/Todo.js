@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Todo({ item, deleteItem }) {
     console.log('item : ', item);
     const { id, title, done } = item;
 
+    const [todoItem, setTodoItem] = useState(item);
     const deleteTodo = (value) => {
-        deleteItem(id);
+        deleteItem(todoItem);
     };
     return (
         <div>

@@ -31,7 +31,7 @@ function App() {
 
     const deleteItem = (value) => {
         console.log('id', value);
-        setTodoItems(todoItems.filter((item, idx) => idx + 1 !== value));
+        setTodoItems(todoItems.filter((item) => item.id !== value.id));
     };
 
     return (
