@@ -34,24 +34,48 @@ function App() {
     }, []);
 
     // todoItems 상태에 새로운 일을 추가하는 함수
-    const addItem = (newItem) => {
-        newItem.id = todoItems.length + 1;
-        newItem.done = false;
+    const addItem = async (newItem) => {
+        // before
+        //     newItem.id = todoItems.length + 1;
+        //     newItem.done = false;
+        // setTodoItems([...todoItems, newItem]);
 
-        setTodoItems([...todoItems, newItem]);
+        // after
+        const res = await axios.post(
+            `${process.env.REACT_APP_DB_HOST}/todo`,
+            newItem
+        );
+        setTodoItems([...todoItems, res.data]);
     };
 
-    const deleteItem = (value) => {
-        console.log('id', value);
+    const deleteItem = async (value) => {
+        // before
+        // setTodoItems(todoItems.filter((item) => item.id !== value.id));
+
+        // after
+        await axios.delete(`${process.env.REACT_APP_DB_HOST}/todo/${value.id}`);
         setTodoItems(todoItems.filter((item) => item.id !== value.id));
+    };
+
+    const updateItem = async (value) => {
+        await axios.patch(
+            `${process.env.REACT_APP_DB_HOST}/todo/${value.id}`,
+            value
+        ); // axios.path('url', {})
     };
 
     return (
         <div className="App">
-            <AddTodo addItem={addItem} />
+            <sapn>Todo:{todoItems.length}</sapn>
+            <AddTodo addItem={addItem} />{' '}
             {/* todoItems를 반복, props로 데이터를 자식에게 전달 */}
             {todoItems.map((item) => (
-                <Todo key={item.id} item={item} deleteItem={deleteItem} />
+                <Todo
+                    key={item.id}
+                    item={item}
+                    deleteItem={deleteItem}
+                    updateItem={updateItem}
+                />
             ))}
         </div>
     );
